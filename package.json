@@ -8,7 +8,6 @@
     "dev": "env-cmd -f ./.env.local nodemon ./bin/www"
   },
   "dependencies": {
-    "admin-lte": "^3.2.0",
     "bcrypt": "^5.1.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.4",
@@ -26,5 +25,8 @@
     "morgan": "~1.9.1",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^3.0.1"
+  },
+  "devDependencies": {
+    "admin-lte": "^3.2.0"
   }
 }
