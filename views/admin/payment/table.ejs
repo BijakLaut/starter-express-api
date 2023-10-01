@@ -1,0 +1,73 @@
+<table id="example2" class="table table-bordered table-hover">
+   <thead>
+      <tr>
+         <th>No</th>
+         <th>Tipe Pembayaran</th>
+         <th>Bank</th>
+         <th>Status</th>
+         <th>Aksi</th>
+      </tr>
+   </thead>
+   <tbody>
+      <% payments.forEach((payment, i) => { %>
+      <tr>
+         <td><%= i + 1 %></td>
+         <td><%= payment.type %></td>
+         <td style="display: flex; flex-direction: column">
+            <% payment.banks.forEach(bk => { %>
+            <span
+               class="badge badge-info"
+               style="
+                  display: block;
+                  max-width: fit-content;
+                  padding-top: 5px;
+                  padding-bottom: 5px;
+                  margin-bottom: 2px;
+               "
+            >
+               <%= bk.bankName + " - " + bk.name + ' ' + bk.noRekening%>
+            </span>
+            <% }) %>
+         </td>
+         <td>
+            <span
+               class="badge <%- (payment.status == 'Y') ? 'badge-success' : 'badge-warning' %>"
+               ><%- (payment.status == 'Y') ? 'Aktif' : 'Nonaktif' %></span
+            >
+         </td>
+         <td>
+            <form
+               action="/payment/status/<%= payment._id %>?_method=PUT"
+               method="post"
+               style="display: inline-block"
+            >
+               <button
+                  type="submit"
+                  class="btn btn-sm <%- (payment.status == 'Y') ? 'btn-info' : 'btn-success' %>"
+               >
+                  <i class="fas fa-power-off"></i>
+                  <%- (payment.status == 'Y') ? 'Deaktivasi' : 'Aktivasi' %>
+               </button>
+            </form>
+            <form
+               action="/payment/delete/<%= payment._id %>?_method=DELETE"
+               method="post"
+               style="display: inline-block"
+            >
+               <a
+                  href="/payment/edit/<%= payment._id %>"
+                  class="btn btn-warning btn-sm"
+               >
+                  <i class="fas fa-pencil-alt"></i>
+                  Ubah</a
+               >
+               <button class="btn btn-danger btn-sm" type="submit">
+                  <i class="fas fa-trash"></i>
+                  Hapus
+               </button>
+            </form>
+         </td>
+      </tr>
+      <% }) %>
+   </tbody>
+</table>

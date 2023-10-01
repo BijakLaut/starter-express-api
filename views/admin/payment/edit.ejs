@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+   <%- include('../../partials/header.ejs') %>
+   <body>
+      <div class="wrapper">
+         <!-- Navbar -->
+         <%- include('../../partials/navbar.ejs') %>
+         <!-- Main Sidebar Container -->
+         <%- include('../../partials/sidebar.ejs') %>
+         <!-- Content Wrapper. Contains page content -->
+         <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+               <div class="container-fluid">
+                  <div class="row mb-2">
+                     <div class="col-sm-6">
+                        <h1>Jenis Pembayaran</h1>
+                     </div>
+                     <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                           <li class="breadcrumb-item"><a href="/">Home</a></li>
+                           <li class="breadcrumb-item">
+                              <a href="/payment">Jenis Pembayaran</a>
+                           </li>
+                           <li class="breadcrumb-item active">Ubah</li>
+                        </ol>
+                     </div>
+                  </div>
+               </div>
+               <!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+               <div class="container-fluid">
+                  <div class="row">
+                     <div class="col-12">
+                        <div class="card card-primary">
+                           <div class="card-header">
+                              <h3 class="card-title">
+                                 Form Update Jenis Pembayaran
+                              </h3>
+                           </div>
+                           <!-- /.card-header -->
+                           <form
+                              action="/payment/edit/<%= payment._id %>?_method=PUT"
+                              method="post"
+                           >
+                              <div class="card-body">
+                                 <div class="form-group">
+                                    <label for="paymentType"
+                                       >Jenis Pembayaran</label
+                                    >
+                                    <input
+                                       type="text"
+                                       class="form-control"
+                                       id="paymentType"
+                                       name="paymentType"
+                                       placeholder="Masukkan jenis pembayaran"
+                                       value="<%= payment.paymentType %>"
+                                    />
+                                 </div>
+                                 <div class="form-group select2-info">
+                                    <label>Bank</label>
+                                    <select
+                                       class="form-control select2"
+                                       style="width: 100%"
+                                       name="bank"
+                                       required
+                                       data-placeholder="Pilih Bank"
+                                       multiple
+                                    >
+                                       <% payment.banks.forEach((bk, i) => { %>
+                                       <option
+                                          selected="<%- (payment.bank[i]._id.toString() == bk._id.toString()) ? 'selected' : ''  %>"
+                                          value="<%= bk._id %>"
+                                       >
+                                          <%= bk.bankName + " - " + bk.name %>
+                                          <%- bk.noRekening %>
+                                       </option>
+                                       <% }) %>
+                                    </select>
+                                 </div>
+                              </div>
+                              <!-- /.card-body -->
+
+                              <div class="card-footer">
+                                 <button type="submit" class="btn btn-primary">
+                                    Submit
+                                 </button>
+                              </div>
+                           </form>
+                           <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                     </div>
+                     <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+               </div>
+               <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+         </div>
+
+         <!-- Footer -->
+         <%- include('../../partials/footer.ejs') %>
+      </div>
+
+      <!-- JS -->
+      <%- include('../../partials/js.ejs') %>
+   </body>
+</html>
