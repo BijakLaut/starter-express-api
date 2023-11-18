@@ -1,6 +1,6 @@
 const Player = require("../player/model");
 const path = require("path");
-const fs = require("@cyclic.sh/s3fs/promises");
+const fs = require("@cyclic.sh/s3fs/promises")(process.env.CYCLIC_BUCKET_NAME);
 const config = require("../../config");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
