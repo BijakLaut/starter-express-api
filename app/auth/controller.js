@@ -1,6 +1,8 @@
 const Player = require("../player/model");
 const path = require("path");
-const fs = require("@cyclic.sh/s3fs/promises")(process.env.CYCLIC_BUCKET_NAME);
+const fs = require("@cyclic.sh/s3fs/promises")(
+   "cyclic-real-gold-piglet-wear-ap-southeast-2"
+);
 const config = require("../../config");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
