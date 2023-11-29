@@ -1,6 +1,6 @@
 const Player = require("../player/model");
 const path = require("path");
-const fs = require("@cyclic.sh/s3fs/promises");
+const fs = require("fs");
 const config = require("../../config");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -36,7 +36,7 @@ module.exports = {
                   delete player._doc.password;
 
                   res.status(201).json({ data: player });
-               } catch (error) {
+               } catch (err) {
                   if (err && err.name == "ValidationError") {
                      return res.status(422).json({
                         error: 1,
